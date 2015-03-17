@@ -4,7 +4,21 @@ class UsersController < ApplicationController
   end
 
   def new
-  end
+  	@user = User.new
+  end 
 
- 
+  def create
+  	@user = User.new(user_params)
+  	if @user.save
+  		#处理注册成功的情况
+     flash[:success] = "欢迎来到IT学堂！"
+      redirect_to @user
+  		else
+  			render 'new'
+end
+end
+private
+def user_params
+params.require(:user).permit(:name, :email, :password,:password_confirmation)
+end
 end
