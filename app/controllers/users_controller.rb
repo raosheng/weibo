@@ -6,8 +6,8 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
-   def show
-  	@user = User.find(params[:id])
+  def show
+  @user = User.find(params[:id])
   end
 
   def new
@@ -18,9 +18,11 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
       log_in @user
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "请检查您的电子邮件以激活您的账号"
   		#处理注册成功的情况
-     flash[:success] = "欢迎来到IT学堂！"
-      redirect_to @user
+     
+      redirect_to root_url
   		else
   			render 'new'
 end

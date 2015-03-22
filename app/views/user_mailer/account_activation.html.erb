@@ -1,0 +1,8 @@
+<h1>weibo</h1>
+
+<p>Hi <%= @user.name %>,</p>
+<p>Welcome to the Sample App! Click on the link below to activate your account:
+ </p>
+ <%= link_to "激活", edit_account_activation_url(@use.activation_token,
+ email: @user.email) %>
+
