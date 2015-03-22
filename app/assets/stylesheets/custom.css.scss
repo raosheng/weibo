@@ -166,7 +166,16 @@ color: $state-danger-text;
 }
 
 
-/* forms */
+/* User insex */
+.users {
+	list-style: none;
+	margin: 0;
+	li {
+	overflow: auto;
+	padding: 10px 0;
+	border-nottom: 1px solid $gray-lighter;
+	}
+}
 
 
 /* universal 
