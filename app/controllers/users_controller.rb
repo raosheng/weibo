@@ -17,7 +17,8 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
-      log_in @user
+      @user.send_activation_email
+      #log_in @user
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "请检查您的电子邮件以激活您的账号"
   		#处理注册成功的情况
@@ -45,7 +46,7 @@ def update
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "用户已删除"
     redirect_to users_url
   end
 
@@ -73,4 +74,6 @@ end
 def admin_user
   redirect_ro(root_url) unless current_user.admin?
 end
+
+
 end
