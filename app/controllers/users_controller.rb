@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
   @user = User.find(params[:id])
+  @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -55,6 +56,7 @@ def user_params
 params.require(:user).permit(:name, :email, :password,:password_confirmation)
 end
  #事前过滤器
+=begin
 #确保用户已登录
  def logged_in_user
   unless logged_in?
@@ -63,9 +65,9 @@ end
     redirect_to login_url
   end
 end
-
+=end
 #确保是正确的用户
-def correct_user
+def currect_user
   @user = User.find(params[:id])
   redirect_to(root_url) unless current_user?(@user)
 end
