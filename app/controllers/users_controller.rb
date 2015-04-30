@@ -23,7 +23,6 @@ class UsersController < ApplicationController
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "请检查您的电子邮件以激活您的账号"
   		#处理注册成功的情况
-     
       redirect_to root_url
   		else
   			render 'new'
